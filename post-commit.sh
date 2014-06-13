@@ -11,8 +11,17 @@ function add_author {
     echo $1 $2 >> ./authors.txt
 }
 
-# set authors
-function set_user {
+# set next author
+function get_author {
+    author_info=$(head -1 authors.txt)
+}
+
+function cycle_author {
+    sed -i -e '1d' authors.txt
+    echo $author_info >> ./authors.txt
+}
+
+function set_username {
     git config --local user.name $1
 }
 
@@ -31,8 +40,15 @@ function ping_github {
 }
 
 function pull_email {
-    echo $user_data | sed -e 's/[{}]/''/g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | grep "email" | cut -d':' -f2
+    echo $user_data | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | grep "email" | cut -d':' -f2
 }
 
-ping_github raorao
-pull_email
+
+#DRIVER CODE
+#ping_github raorao
+#pull_email
+
+create_authors_file
+#add_author 'whattauuupp' 'lass'
+get_author
+cycle_author
