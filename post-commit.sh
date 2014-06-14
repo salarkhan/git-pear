@@ -3,22 +3,25 @@
 # add authors
 # usage: auth add salarkhan salar.k3@gmail.com
 # result: cat this pair into .git/authors
+
 function create_authors_file {
-    test -e ./authors.txt || touch ./authors.txt
+    authors="./authors.txt"
+    [ -e $authors ] || touch $authors
 }
 
 function add_author {
-    echo $1 $2 >> ./authors.txt
+    (grep $1 $authors > /dev/null) && exit 1
+    echo $1 $2 >> $authors
 }
 
 # set next author
 function get_author {
-    author_info=$(head -1 authors.txt)
+    author_info=$(head -1 $authors)
 }
 
 function cycle_author {
-    sed -i -e '1d' authors.txt
-    echo $author_info >> ./authors.txt
+    sed -i -e '1d' /authors.txt
+    echo $author_info >> /authors.txt
 }
 
 function set_username {
@@ -49,6 +52,7 @@ function pull_email {
 #pull_email
 
 create_authors_file
-#add_author 'whattauuupp' 'lass'
-get_author
-cycle_author
+add_author 'whattauuupp' 'lass'
+add_author 'shit' 'bass'
+#get_author
+#cycle_author
