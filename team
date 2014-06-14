@@ -4,31 +4,36 @@
 # usage: auth add salarkhan salar.k3@gmail.com
 # result: cat this pair into .git/authors
 
-function create_authors_file {
+function create_authors_file() {
     authors="./authors.txt"
-    [ -e $authors ] || touch $authors
+    touch $authors || exit
 }
 
-function add_author {
+function add_author() {
     (grep $1 $authors > /dev/null) && exit 1
+    echo is this happening
     echo $1 $2 >> $authors
 }
 
 # set next author
-function get_author {
+function get_author() {
     author_info=$(head -1 $authors)
 }
 
-function cycle_author {
-    sed -i -e '1d' /authors.txt
-    echo $author_info >> /authors.txt
+function cycle_author() {
+    sed -i -e '1d' $authors
+    echo $author_info >> $authors
 }
 
-function set_username {
+function current_user(){
+    echo $author_info
+}
+
+function set_username() {
     git config --local user.name $1
 }
 
-function set_email {
+function set_email() {
     git config --local user.email $1
 }
 
@@ -38,11 +43,11 @@ function set_email {
 # reset authors to default // empty authors array
 
 # get user email from their username
-function ping_github {
+function ping_github() {
     user_data=$(curl -i https://api.github.com/users/$1)
 }
 
-function pull_email {
+function pull_email() {
     echo $user_data | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | grep "email" | cut -d':' -f2
 }
 
@@ -52,7 +57,10 @@ function pull_email {
 #pull_email
 
 create_authors_file
-add_author 'whattauuupp' 'lass'
-add_author 'shit' 'bass'
 #get_author
 #cycle_author
+
+
+[[ $1 = "add" ]] && add_author $2 $3
+[[ $1 = "cycle" ]] && get_author && cycle_author
+[[ $1 = "me" ]] && current_user
