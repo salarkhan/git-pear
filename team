@@ -1,9 +1,5 @@
 #!/bin/sh
 
-# add authors
-# usage: auth add salarkhan salar.k3@gmail.com
-# result: cat this pair into .git/authors
-
 function create_authors_file() {
     authors="./authors.txt"
     touch $authors || exit
@@ -11,11 +7,9 @@ function create_authors_file() {
 
 function add_author() {
     (grep $1 $authors > /dev/null) && exit 1
-    echo is this happening
     echo $1 $2 >> $authors
 }
 
-# set next author
 function get_author() {
     author_info=$(head -1 $authors)
 }
@@ -29,12 +23,12 @@ function current_user(){
     echo $author_info
 }
 
-function set_username() {
-    git config --local user.name $1
+function list_users(){
+    cat $authors
 }
 
-function set_email() {
-    git config --local user.email $1
+function set_author(){
+
 }
 
 # store default user name & email
@@ -51,16 +45,9 @@ function pull_email() {
     echo $user_data | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | grep "email" | cut -d':' -f2
 }
 
-
-#DRIVER CODE
-#ping_github raorao
-#pull_email
-
+# DRIVER CODE
 create_authors_file
-#get_author
-#cycle_author
-
-
 [[ $1 = "add" ]] && add_author $2 $3
 [[ $1 = "cycle" ]] && get_author && cycle_author
 [[ $1 = "me" ]] && current_user
+[[ $1 = "list" ]] && list_users
