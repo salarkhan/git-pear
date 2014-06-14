@@ -15,7 +15,7 @@ function get_author() {
 }
 
 function cycle_author() {
-    sed -i -e '1d' $authors
+    sed -i '' -e '1d' $authors
     echo $author_info >> $authors
 }
 
@@ -28,7 +28,7 @@ function list_users(){
 }
 
 function set_author(){
-
+    echo what
 }
 
 # store default user name & email
@@ -47,7 +47,7 @@ function pull_email() {
 
 # DRIVER CODE
 create_authors_file
-[[ $1 = "add" ]] && add_author $2 $3
+[[ $1 = "add" ]] && add_author $2 $3 && get_author
 [[ $1 = "cycle" ]] && get_author && cycle_author
 [[ $1 = "me" ]] && current_user
 [[ $1 = "list" ]] && list_users
