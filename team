@@ -12,6 +12,8 @@ function add_author() {
 
 function get_author() {
     author_info=$(head -1 $authors)
+    username=$(echo $author_info | cut -d ' ' -f1)
+    email=$(echo $author_info | cut -d ' ' -f2)
 }
 
 function cycle_author() {
@@ -28,7 +30,12 @@ function list_users(){
 }
 
 function set_author(){
-    echo what
+    sed -ie "s/user.name/& $username /g" post-commit.sh
+    sed -ie "s/user.email/& $email /g" post-commit.sh
+}
+
+function edit_hook(){
+    echo what 
 }
 
 # store default user name & email
@@ -51,3 +58,4 @@ create_authors_file
 [[ $1 = "cycle" ]] && get_author && cycle_author
 [[ $1 = "me" ]] && current_user
 [[ $1 = "list" ]] && list_users
+[[ $1 = "set" ]] && get_author && set_author
