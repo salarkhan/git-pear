@@ -1,8 +1,9 @@
 #!/bin/sh
 
-function create_authors_file() {
-    authors="./authors.txt"
-    touch $authors || exit
+# CRUD FUNCTIONS
+function create_team_file(){
+    team="./team.txt"
+    touch $team || exit
 }
 
 function add_author() {
@@ -10,40 +11,53 @@ function add_author() {
     echo $1 $2 >> $authors
 }
 
-function get_author() {
-    author_info=$(head -1 $authors)
-    username=$(echo $author_info | cut -d ' ' -f1)
-    email=$(echo $author_info | cut -d ' ' -f2)
+function add_teammate(){
+    (grep $1 $team > /dev/null) && exit 1
+    echo $1 $2 >> $team
 }
 
-function cycle_author() {
-    sed -i '' -e '1d' $authors
-    echo $author_info >> $authors
+function cycle_team() {
+    sed -i '' -e '1d' $team
+    echo $user_info >> $team
+}
+
+
+function list_team(){
+    cat $team
 }
 
 function current_user(){
-    echo $author_info
+    echo $user_info
 }
 
-function list_users(){
-    cat $authors
+# GETTERS & SETTERS
+function get_committer(){
+    user_info=$(head -1 $team)
+    username=$(echo $user_info | cut -d ' ' -f1)
+    email=$(echo $user_info | cut -d ' ' -f2)
+}
+
+function set_committer(){
+    git config --local user.name $userame
+    git config --local user.email $email
+}
+
+function set_hook_committer(){
+    sed -ie "s/--local user.name/& $username /g" pre-commit.sh
+    sed -ie "s/--local user.email/& $email /g" pre-commit.sh
 }
 
 function set_author(){
-    sed -ie "s/user.name/& $username /g" post-commit.sh
-    sed -ie "s/user.email/& $email /g" post-commit.sh
+    export GIT_AUTHOR_NAME=$username
+    export GIT_AUTHOR_EMAIL=$email
 }
 
 function edit_hook(){
     echo what 
 }
 
-# store default user name & email
-# list authors // return authors array
-# remove author // remove from hash lookup
-# reset authors to default // empty authors array
 
-# get user email from their username
+# STRETCH: GET EMAIL FROM USERNAME
 function ping_github() {
     user_data=$(curl -i https://api.github.com/users/$1)
 }
@@ -53,9 +67,9 @@ function pull_email() {
 }
 
 # DRIVER CODE
-create_authors_file
-[[ $1 = "add" ]] && add_author $2 $3 && get_author
-[[ $1 = "cycle" ]] && get_author && cycle_author
+create_team_file
+[[ $1 = "add" ]] && add_teammate $2 $3 && get_teammate
+[[ $1 = "cycle" ]] && get_committer && cycle_team
 [[ $1 = "me" ]] && current_user
-[[ $1 = "list" ]] && list_users
-[[ $1 = "set" ]] && get_author && set_author
+[[ $1 = "list" ]] && list_team
+[[ $1 = "set" ]] && get_committer && set_committer && set_hook_committer
