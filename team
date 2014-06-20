@@ -6,9 +6,10 @@ function create_team_file(){
     touch $team || exit
 }
 
-function add_author() {
-    (grep $1 $authors > /dev/null) && exit 1
-    echo $1 $2 >> $authors
+function create_hook_file(){
+    hook="./pre-commit.sh"
+    touch $hook || exit
+    chmod +x $hook
 }
 
 function add_teammate(){
@@ -32,30 +33,31 @@ function current_user(){
 
 # GETTERS & SETTERS
 function get_committer(){
-    user_info=$(head -1 $team)
-    username=$(echo $user_info | cut -d ' ' -f1)
-    email=$(echo $user_info | cut -d ' ' -f2)
+    committer_info=$(head -1 $team)
+    committer_name=$(echo $user_info | cut -d ' ' -f1)
+    committer_email=$(echo $user_info | cut -d ' ' -f2)
 }
 
 function set_committer(){
-    git config --local user.name $userame
-    git config --local user.email $email
+    git config --local user.name $committer_name
+    git config --local user.email $committer_email
 }
 
 function set_hook_committer(){
-    sed -ie "s/--local user.name/& $username /g" pre-commit.sh
-    sed -ie "s/--local user.email/& $email /g" pre-commit.sh
+    sed -ie "s/--local user.name/& $committer_name /g" pre-commit.sh
+    sed -ie "s/--local user.email/& $committer_email /g" pre-commit.sh
+}
+
+function get_author(){
+    author_info=$(head -2 $team)
+    author_name=$(echo $author_info | cut -d ' ' -f1)
+    author_email=$(echo $author_info | cut -d ' ' -f2)
 }
 
 function set_author(){
-    export GIT_AUTHOR_NAME=$username
-    export GIT_AUTHOR_EMAIL=$email
+    export GIT_AUTHOR_NAME=$author_name
+    export GIT_AUTHOR_EMAIL=$author_email
 }
-
-function edit_hook(){
-    echo what 
-}
-
 
 # STRETCH: GET EMAIL FROM USERNAME
 function ping_github() {
@@ -67,9 +69,10 @@ function pull_email() {
 }
 
 # DRIVER CODE
-create_team_file
-[[ $1 = "add" ]] && add_teammate $2 $3 && get_teammate
+create_team_file 
+create_hook_file
+[[ $1 = "add" ]] && add_teammate $2 $3 && get_committer
 [[ $1 = "cycle" ]] && get_committer && cycle_team
 [[ $1 = "me" ]] && current_user
 [[ $1 = "list" ]] && list_team
-[[ $1 = "set" ]] && get_committer && set_committer && set_hook_committer
+[[ $1 = "set" ]] && get_committer && set_committer && set_hook_committer && get_author && set_author
