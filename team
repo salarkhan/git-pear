@@ -8,7 +8,7 @@ function create_team_file(){
 
 function create_hook_file(){
     hook="./pre-commit.sh"
-    touch $hook || exit
+    touch $hook
     chmod +x $hook
 }
 
@@ -69,7 +69,7 @@ function pull_email() {
 }
 
 # DRIVER CODE
-create_team_file 
+create_team_file
 create_hook_file
 [[ $1 = "add" ]] && add_teammate $2 $3 && get_committer
 [[ $1 = "cycle" ]] && get_committer && cycle_team
