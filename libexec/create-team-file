@@ -1,0 +1,4 @@
+#!/bin/sh
+
+team="$dir/.git/team.txt"
+touch $team
