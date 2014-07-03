@@ -29,3 +29,7 @@ test -x $command_path || {
   $usage_command
   exit 1
 }
+
+# Replace the current process with a process created by invoking the command with
+# all args except the first (which was the command name)
+exec $command_path "${@:2}"
