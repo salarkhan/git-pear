@@ -8,3 +8,18 @@ set -o errexit # Exit immediately if a command exits with a non-zero status.
 pear_dir=$(cd $(dirname $0)/..; pwd)
 # The dir with all the uf commands
 pear_commands_dir=$pear_dir/libexec
+
+# Alias command to the first arg
+command=$1
+
+# If no command was given then print usage and exit
+test -n "$command" || {
+  echo "Pear together!"
+  echo "    \,(_>"
+  echo "    .'."
+  echo "   /   \\"
+  echo "  (     )"
+  echo "   \`-'-'"
+  # $usage_command
+  exit
+}
