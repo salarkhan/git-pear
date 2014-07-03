@@ -5,21 +5,33 @@
 set -o errexit # Exit immediately if a command exits with a non-zero status.
 
 # Grab the full path to the uf project directory
-pear_dir=$(cd $(dirname $0)/..; pwd)
+pear_dir=$(cd $(dirname $0); pwd)
 # The dir with all the uf commands
 pear_commands_dir=$pear_dir/libexec
+
 
 # Alias command to the first arg
 command=$1
 
+# The full path to the intended command
+command_path=$pear_commands_dir/$command
+
 # If no command was given then print usage and exit
+
+# echo $pear_dir
+# echo $pear_commands_dir
+# echo $command_path
+
 test -n "$command" || {
-  echo "Pear together!"
-  echo "    \,(_>"
-  echo "    .'."
-  echo "   /   \\"
-  echo "  (     )"
-  echo "   \`-'-'"
-  # $usage_command
-  exit
+  echo $command
+  # echo $command_path
+  $command_path"usage"
+  exit 0
 }
+
+# If intended command does not exist tell the user and exit with error
+# test -x $command_path || {
+#   echo "Unknown command: $command"
+#   $command_path/usage
+#   exit 1
+# }
