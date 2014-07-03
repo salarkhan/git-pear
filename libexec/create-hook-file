@@ -1,0 +1,4 @@
+#!/bin/sh
+pear_dir=$(cd $(dirname $0); pwd)
+
+cp $pear_dir"/../pre-commit" $PEAR_WORKING_DIR"/.git/hooks"
