@@ -1,6 +1,11 @@
 #!/bin/sh
-
-echo "Pear together!"
+echo ""
+echo "~~ git-pear ~~"
+echo "Cycle commit authors and committers for"
+echo "sharing credit while coding together"
+echo "Usage:"
+echo "pear user1@email.com user2@email.com"
+echo ""
 echo "    \,(_>"
 echo "    .'."
 echo "   /   \\"
