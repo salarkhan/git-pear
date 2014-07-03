@@ -9,7 +9,7 @@ Committers and commit authors will cycle through this list between each commit.
 pear example1@email.com pear example2@email.com
 ```
 
-To stop using pear simply type pear with no arguements
+To stop using pear simply type pear with no arguments
 ```
 pear
 ```
