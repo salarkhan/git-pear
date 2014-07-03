@@ -1,0 +1,8 @@
+#!/bin/sh
+
+rm $PEAR_WORKING_DIR"/.git/hooks/pre-commit"
+rm $PEAR_WORKING_DIR"/.git/team.txt"
+
+#echo "$(git config --global -l)" | sed 's/email/g/'
+#echo $(git config --global -l) | awk '{print match($0, /email.(\S*)/)}'
+#echo $(git config --global -l) | sed 's/email.(\S*)/g/'
