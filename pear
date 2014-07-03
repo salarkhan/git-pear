@@ -9,7 +9,7 @@ pear_dir=$(cd $(dirname $0); pwd)
 # The dir with all the uf commands
 pear_commands_dir=$pear_dir/libexec
 usage_command=$pear_commands_dir/usage
-working_dir=$(cd $(git rev-parse --show-toplevel); pwd)
+export PEAR_WORKING_DIR=$(cd $(git rev-parse --show-toplevel); pwd)
 
 
 # Alias command to the first arg
