@@ -1,0 +1,9 @@
+#!/bin/sh
+
+
+git config --local user.name aleksharma12
+#git config --local user.email asimplechris@gmail.com
+
+
+
+git commit --author=salarkhan --no-verify

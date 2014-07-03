@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# CRUD FUNCTIONS
+
+set -o errexit # Exit immediately if a command exits with a non-zero status.
+
+# Grab the full path to the uf project directory
+pear_dir=$(cd $(dirname $0)/..; pwd)
+# The dir with all the uf commands
+pear_commands_dir=$pear_dir/libexec

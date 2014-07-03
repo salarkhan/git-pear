@@ -1,13 +1,16 @@
 #!/bin/sh
 
 # CRUD FUNCTIONS
+
+dir=$(cd $(dirname $0); pwd)
+
 function create_team_file(){
-    team="./team.txt"
-    touch $team || exit
+    team="$dir/.git/team.txt"
+    touch $team
 }
 
 function create_hook_file(){
-    hook="./pre-commit.sh"
+    hook="$dir/.git/pre-commit"
     touch $hook
     chmod +x $hook
 }
