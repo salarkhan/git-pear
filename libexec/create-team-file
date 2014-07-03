@@ -1,7 +1,3 @@
 #!/bin/sh
 
-dir=$PEAR_WORKING_DIR
-echo $dir
-
-team="$dir/.git/team.txt"
-touch $team
+touch $PEAR_WORKING_DIR/.git/team.txt
