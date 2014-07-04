@@ -4,7 +4,5 @@
 rm -f $PEAR_WORKING_DIR"/.git/hooks/pre-commit"
 rm -f $PEAR_WORKING_DIR"/.git/team.txt"
 
-# Pull email from global git settings
-email=$(echo "$(git config --global -l)" | grep -E 'email.(\S*)' | cut -d '=' -f2) 
-
-git config --local user.email $email
+# Remove any local git information we have set
+git config --local --remove-section user
