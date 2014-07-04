@@ -8,8 +8,6 @@ pear_dir=$(cd $(dirname $0); pwd)
 pear_commands_dir=$pear_dir/libexec
 usage_command=$pear_commands_dir/usage
 
-# Exported for use in other programs... coupled too tightly?
-export PEAR_WORKING_DIR=$(cd $(git rev-parse --show-toplevel); pwd)
 
 
 # Alias command to the first arg
@@ -18,13 +16,23 @@ command=$1
 # The full path to the intended command
 command_path=$pear_commands_dir/$command
 
-# If no command was given stop using pear in current directory
+# Exit with info if not a git directory
+if ! git rev-parse --git-dir > /dev/null 2>&1; then
+  echo "Pear adds pairs to local git directories only."
+  echo "Please try using pear in a git repository"
+  exit 1
+else
+  # Exported for use in other programs... coupled too tightly?
+  export PEAR_WORKING_DIR=$(cd $(git rev-parse --show-toplevel); pwd)
+fi
+
+# If intended command does not exist tell the user and exit with error
 test -n "$command" || {
   $pear_commands_dir/uninstall
   exit 1
 }
 
-# If intended command does not exist tell the user and exit with error
+# If no command was given then print usage and exit
 test -x $command_path || {
   echo "Unknown Command:   $command"
   $usage_command
