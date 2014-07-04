@@ -5,4 +5,4 @@ rm -f $PEAR_WORKING_DIR"/.git/hooks/pre-commit"
 rm -f $PEAR_WORKING_DIR"/.git/team.txt"
 
 # Remove any local git information we have set
-git config --local --remove-section user
+git config --local user.name 2>&1>/dev/null && git config --local --remove-section user

@@ -20,8 +20,8 @@ command_path=$pear_commands_dir/$command
 
 # If no command was given then print usage and exit
 test -n "$command" || {
-  $usage_command
-  exit 0
+  $pear_commands_dir/uninstall
+  exit 1
 }
 
 # If intended command does not exist tell the user and exit with error
