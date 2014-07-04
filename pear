@@ -16,6 +16,7 @@ command=$1
 # The full path to the intended command
 command_path=$pear_commands_dir/$command
 
+# Exit with info if not a git directory
 if ! git rev-parse --git-dir > /dev/null 2>&1; then
   echo "Pear adds pairs to local git directories only."
   echo "Please try using pear in a git repository"
@@ -25,10 +26,10 @@ else
   export PEAR_WORKING_DIR=$(cd $(git rev-parse --show-toplevel); pwd)
 fi
 
-# If no command was given then print usage and exit
+# If no command was given resume normal git operation
 test -n "$command" || {
-  $usage_command
-  exit 0
+  $pear_commands_dir/uninstall
+  exit 1
 }
 
 # If intended command does not exist tell the user and exit with error
