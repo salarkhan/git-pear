@@ -1,5 +1,0 @@
-#!/bin/sh
-
-git_dir=$(git rev-parse --git-dir)
-
-touch $git_dir/team.txt
