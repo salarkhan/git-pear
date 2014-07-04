@@ -18,7 +18,7 @@ command=$1
 # The full path to the intended command
 command_path=$pear_commands_dir/$command
 
-# If no command was given then print usage and exit
+# If no command was given stop using pear in current directory
 test -n "$command" || {
   $pear_commands_dir/uninstall
   exit 1
