@@ -1,0 +1,6 @@
+#!/bin/sh
+
+git_dir=$(git rev-parse --git-dir)
+team_text_location=$git_dir/team.txt
+
+head -1 $team_text_location
