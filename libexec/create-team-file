@@ -2,4 +2,4 @@
 
 git_dir=$(git rev-parse --git-dir)
 
-touch $PEAR_WORKING_DIR/$git_dir/team.txt
+touch $git_dir/team.txt
