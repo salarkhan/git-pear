@@ -1,3 +1,5 @@
 #!/bin/sh
 
-touch $PEAR_WORKING_DIR/.git/team.txt
+git_dir=$(git rev-parse --git-dir)
+
+touch $PEAR_WORKING_DIR/$git_dir/team.txt

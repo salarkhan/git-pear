@@ -1,4 +1,5 @@
 #!/bin/sh
 pear_dir=$(cd $(dirname $0); pwd)
+git_dir=$(git rev-parse --git-dir)
 
-cp $pear_dir"/../pre-commit" $PEAR_WORKING_DIR"/.git/hooks"
+cp $pear_dir"/../pre-commit" $PEAR_WORKING_DIR"/$git_dir/hooks"
