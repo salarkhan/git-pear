@@ -7,6 +7,8 @@ pear_dir=$(cd $(dirname $0); pwd)
 # The dir with all the git-pear commands
 pear_commands_dir=$pear_dir/libexec
 usage_command=$pear_commands_dir/usage
+git_dir=$(git rev-parse --git-dir)
+add_command=$pear_commands_dir/add
 
 
 
@@ -28,9 +30,22 @@ fi
 
 # If no command was given resume normal git operation
 test -n "$command" || {
-  $pear_commands_dir/uninstall
+  if test -f $git_dir/team.txt; then
+    $pear_commands_dir/uninstall
+  else
+    $usage_command
+  fi
   exit 0
 }
+
+# if the first argument is an email address call the add command
+if [[ $command =~ @ ]]; then
+  # Uninstall any already existing users.
+  $pear_commands_dir/uninstall
+  # Replace the current process with a process created by invoking the add
+  # command with all args
+  exec $add_command "${@}"
+fi
 
 # If intended command does not exist tell the user and exit with error
 test -x $command_path || {
