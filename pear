@@ -29,7 +29,7 @@ fi
 # If no command was given resume normal git operation
 test -n "$command" || {
   $pear_commands_dir/uninstall
-  exit 1
+  exit 0
 }
 
 # If intended command does not exist tell the user and exit with error
