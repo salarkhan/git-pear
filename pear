@@ -35,8 +35,7 @@ test -n "$command" || {
   else
     $usage_command
   fi
-
-  exit 1
+  exit 0
 }
 
 # if the first argument is an email address call the add command
