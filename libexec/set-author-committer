@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Set this commit's committer
+git config --local user.name $(pear get-committer)
+
+# Assign the current author to a variable before cycling through the list
+# We must do this first because actually assigning the author with git
+# requires leaving the pre-commit hook
+author=$(pear get-author)
+
+pear cycle
+
+# The commit line must run last as it essentially exits this pre-commit
+git commit --author=$author --no-verify
