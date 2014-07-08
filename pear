@@ -30,11 +30,13 @@ fi
 # If no command was given resume normal git operation
 test -n "$command" || {
   $pear_commands_dir/uninstall
-  exit 1
+  exit 0
 }
 
 # if the first argument is an email address call the add command
 if [[ $command =~ @ ]]; then
+  # Uninstall any already existing users.
+  $pear_commands_dir/uninstall
   # Replace the current process with a process created by invoking the add
   # command with all args
   exec $add_command "${@}"
