@@ -1,4 +1,5 @@
 #!/bin/sh
+
 echo ""
 echo "~~ git-pear ~~"
 echo "Cycle commit authors and committers for"

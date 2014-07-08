@@ -1,17 +1,3 @@
 #!/bin/sh
 
-# Read first two emails in list
-
-# Set this commit's committer
-git config --local user.name $this_committer
-
-# Assign the current author to a variable before cycling through the list
-# We must do this first because actually assigning the author with git
-# requires leaving the pre-commit hook
-
-# author=$this_author
-
-# Cycle commit list
-
-# The commit line must run last as it essentially exits this pre-commit
-git commit --author=$author --no-verify
+pear set-author-committer
