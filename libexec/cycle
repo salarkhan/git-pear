@@ -1,0 +1,8 @@
+#!/bin/sh
+
+git_dir=$(git rev-parse --git-dir)
+team=$PEAR_WORKING_DIR"/$git_dir/team.txt"
+committer=$(source $PEAR_WORKING_DIR/libexec/get-committer)
+
+sed -i '' -e '1d' $team
+echo $committer >> $team
