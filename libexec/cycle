@@ -2,7 +2,7 @@
 
 git_dir=$(git rev-parse --git-dir)
 team=$PEAR_WORKING_DIR"/$git_dir/team.txt"
-committer=$(source $PEAR_WORKING_DIR/libexec/get-committer)
+author=$(pear get-author)
 
 sed -i '' -e '1d' $team
-echo $committer >> $team
+echo $author >> $team
