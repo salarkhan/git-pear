@@ -13,5 +13,10 @@ test $2 && {
   exit
 }
 
-# Append the argument to the text file
-echo $1 >> $team_text_location
+# Test for duplicate team members
+if grep -q $1 $team_text_location; then
+  echo "$1 is already on the team!"
+else
+  # Append the argument to the text file
+  echo $1 >> $team_text_location
+fi
