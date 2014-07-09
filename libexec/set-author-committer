@@ -11,4 +11,4 @@ author=$(pear get-author)
 pear cycle
 
 # The commit line must run last as it essentially exits this pre-commit
-git commit --author=$author --no-verify
+git commit --author="Pear <$author>" --no-verify
