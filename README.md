@@ -14,6 +14,13 @@ To stop using pear simply type pear with no arguments
 pear
 ```
 
+##Installation
+```
+git clone https://github.com/salarkhan/git-pear.git
+cd git-pear
+pear install
+```
+
 ##Examples!
 ```
 Initializing a repo & pear
