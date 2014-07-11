@@ -3,4 +3,4 @@
 rm -rf /usr/local/bin/pear
 ln -s $PWD/pear /usr/local/bin/
 
-echo "Installed to /usr/local/bin/git-pear"
+echo "Installed to /usr/local/bin/pear"
