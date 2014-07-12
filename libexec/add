@@ -5,7 +5,7 @@ team_text_location=$git_dir/team.txt
 
 touch $team_text_location
 
-[[ -f $git_dir/hooks/pre-commit ]] || pear create-hook-file
+[[ -f $git_dir/hooks/post-commit ]] || pear create-hook-file
 
 # If multiple args given run this script once for each arg
 test $2 && {
