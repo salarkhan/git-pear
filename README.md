@@ -18,7 +18,7 @@ pear
 ```
 git clone https://github.com/salarkhan/git-pear.git
 cd git-pear
-pear install
+./install
 ```
 
 ##Examples!
