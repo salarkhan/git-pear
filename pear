@@ -3,14 +3,12 @@
 set -o errexit # Exit immediately if a command exits with a non-zero status.
 
 # Grab the full path to the git-pear project directory
-pear_dir=$(cd $(dirname $0); pwd)
+pear_dir=$(cd $( dirname $(readlink $0 )); pwd)
 # The dir with all the git-pear commands
 pear_commands_dir=$pear_dir/libexec
 usage_command=$pear_commands_dir/usage
 git_dir=$(git rev-parse --git-dir)
 add_command=$pear_commands_dir/add
-
-
 
 # Alias command to the first arg
 command=$1
