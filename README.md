@@ -30,4 +30,4 @@ The result on Github
 ```
 Using pear on a brand new repo
 ```
-![git terminal](https://cloud.githubusercontent.com/assets/3118416/3544088/ed0f9882-0868-11e4-8d6e-c65628cf0932.png)  
+![pear init](https://cloud.githubusercontent.com/assets/3118416/3562573/10d319ca-09f8-11e4-9d5e-771d0f812340.png)
