@@ -1,0 +1,3 @@
+#!/bin/sh
+
+pear set-author-committer
