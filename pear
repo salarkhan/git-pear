@@ -20,6 +20,7 @@ if ! git rev-parse --git-dir > /dev/null 2>&1; then
   echo "Please try using pear in a git repository"
   exit 1
 else
+  # Cannot set git dir earlier or the usage will not display correctly
   git_dir=$(git rev-parse --git-dir)
   # Exported for use in other programs... coupled too tightly?
   export PEAR_WORKING_DIR=$(cd $(git rev-parse --show-toplevel); pwd)
