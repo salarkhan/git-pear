@@ -1,18 +1,17 @@
 #!/bin/sh
 
-set -o errexit # Exit immediately if a command exits with a non-zero status.
+# Exit immediately if a command exits with a non-zero status.
+set -o errexit 
 
 # Grab the full path to the git-pear project directory
 pear_dir=$(cd $( dirname $(readlink $0 )); pwd)
 # The dir with all the git-pear commands
 pear_commands_dir=$pear_dir/libexec
+# Commands that pear directly calls
 usage_command=$pear_commands_dir/usage
-git_dir=$(git rev-parse --git-dir)
 add_command=$pear_commands_dir/add
-
 # Alias command to the first arg
 command=$1
-
 # The full path to the intended command
 command_path=$pear_commands_dir/$command
 
@@ -22,14 +21,13 @@ if ! git rev-parse --git-dir > /dev/null 2>&1; then
   echo "Please try using pear in a git repository"
   exit 1
 else
-  # Exported for use in other programs... coupled too tightly?
-  export PEAR_WORKING_DIR=$(cd $(git rev-parse --show-toplevel); pwd)
+    git_dir=$(git rev-parse --git-dir)
 fi
 
 # If no command was given resume normal git operation
 test -n "$command" || {
   if test -f $git_dir/team.txt; then
-    $pear_commands_dir/uninstall
+    $pear_commands_dir/quit
   else
     $usage_command
   fi
@@ -37,10 +35,10 @@ test -n "$command" || {
   exit 0 
 }
 
-# if the first argument is an email address call the add command
+# If the first argument is an email address call the add command
 if [[ $command =~ @ ]]; then
   # Uninstall any already existing users.
-  $pear_commands_dir/uninstall
+  $pear_commands_dir/quit
   # Replace the current process with a process created by invoking the add
   # command with all args
   exec $add_command "${@}"

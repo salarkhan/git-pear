@@ -1,8 +1,10 @@
 #!/bin/sh
 
+git_dir=$(git rev-parse --git-dir)
+
 # Blow away hook & team files
-rm -f $PEAR_WORKING_DIR"/.git/hooks/post-commit"
-rm -f $PEAR_WORKING_DIR"/.git/team.txt"
+rm -f $git_dir"/hooks/post-commit"
+rm -f $git_dir"/team.txt"
 
 # Remove any local git information we have set
 git config --local user.name 2>&1>/dev/null &&
