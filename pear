@@ -7,7 +7,6 @@ pear_dir=$(cd $( dirname $(readlink $0 )); pwd)
 # The dir with all the git-pear commands
 pear_commands_dir=$pear_dir/libexec
 usage_command=$pear_commands_dir/usage
-git_dir=$(git rev-parse --git-dir)
 add_command=$pear_commands_dir/add
 
 # Alias command to the first arg
@@ -15,13 +14,13 @@ command=$1
 
 # The full path to the intended command
 command_path=$pear_commands_dir/$command
-
 # Exit with info if not a git directory
 if ! git rev-parse --git-dir > /dev/null 2>&1; then
   echo "Pear adds pairs to local git directories only."
   echo "Please try using pear in a git repository"
   exit 1
 else
+  git_dir=$(git rev-parse --git-dir)
   # Exported for use in other programs... coupled too tightly?
   export PEAR_WORKING_DIR=$(cd $(git rev-parse --show-toplevel); pwd)
 fi
@@ -34,7 +33,7 @@ test -n "$command" || {
     $usage_command
   fi
 
-  exit 0 
+  exit 0
 }
 
 # if the first argument is an email address call the add command
