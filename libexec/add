@@ -4,18 +4,21 @@ git_dir=$(git rev-parse --git-dir)
 
 [[ -f $git_dir/hooks/post-commit ]] || pear create-hook-file
 
-# If multiple args given run this script once for each arg
-test $2 && {
-  for arg in $@
-    do $0 $arg
-  done
-  exit
-}
+# # If multiple args given run this script once for each arg
+# test $2 && {
+#   for arg in $@
+#     do $0 $arg
+#   done
+#   exit
+# }
 
-# Test for duplicate team members
-if (git config --local --get-all team.emails | grep $1) > /dev/null 2>&1; then
-  echo "$1 is already on the team!"
-else
-  # Append the argument to the config file
-  git config --local --add team.emails $1
-fi
+# # Test for duplicate team members
+# if (git config --local --get-all team.emails | grep $1) > /dev/null 2>&1; then
+#   echo "$1 is already on the team!"
+# else
+#   # Append the argument to the config file
+#   git config --local --add team.emails $1
+# fi
+
+git config --local author.email $1
+git config --local user.email $2

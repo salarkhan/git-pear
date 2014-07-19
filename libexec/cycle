@@ -1,8 +1,11 @@
 #!/bin/sh
 
-git_dir=$(git rev-parse --git-dir)
-team=$git_dir/team.txt
+#returns all emails as new lines
+#git config --local --get-all team.emails 
+#take first line, set as committer
 author=$(pear get-author)
+committer=$(pear get-committer)
 
-sed -i '' -e '1d' $team
-echo $author >> $team
+#swap author & committer
+git config --local user.email $author 
+git config --local author.email $committer 

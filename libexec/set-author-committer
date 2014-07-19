@@ -5,7 +5,7 @@
 export HOOK_FIRED=YES
 
 # Set this commit's committer
-git config --local user.email $(pear get-committer)
+#git config --local user.email $(pear get-committer)
 
 # Assign the current author to a variable before cycling through the list
 author=$(pear get-author)
