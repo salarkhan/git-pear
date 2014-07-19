@@ -1,11 +1,8 @@
 #!/bin/sh
 
-#returns all emails as new lines
-#git config --local --get-all team.emails 
-#take first line, set as committer
 author=$(pear get-author)
 committer=$(pear get-committer)
 
-#swap author & committer
-git config --local user.email $author 
-git config --local author.email $committer 
+# Swap current author & committer
+git config --local user.email $committer 
+git config --local author.email $author
