@@ -1,8 +1,6 @@
 #!/bin/sh
 
-git_dir=$(git rev-parse --git-dir)
-team=$git_dir/team.txt
-author=$(pear get-author)
-
-sed -i '' -e '1d' $team
-echo $author >> $team
+#author=$(pear get-author)
+emails=$(git config --local --get-all team.emails)
+echo $emails | cut -d ' ' -f 1
+echo ${emails#?}
