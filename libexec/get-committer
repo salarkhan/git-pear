@@ -1,6 +1,5 @@
 #!/bin/sh
 
-git_dir=$(git rev-parse --git-dir)
-team_text_location=$git_dir/team.txt
+emails=$(git config --local --get-all team.emails)
 
-sed -n 2p $team_text_location
+echo $emails | cut -d ' ' -f 2
