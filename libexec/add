@@ -13,9 +13,6 @@ test $2 && {
 }
 
 # Test for duplicate team members
-if (git config --local --get-all team.emails | grep $1) > /dev/null 2>&1; then
-  echo "$1 is already on the team!"
-else
+(git config --local --get-all team.emails | grep $1) > /dev/null 2>&1 ||
   # Append the argument to the config file
   git config --local --add team.emails $1
-fi
