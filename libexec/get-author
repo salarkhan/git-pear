@@ -1,5 +1,5 @@
 #!/bin/sh
 
-emails=$(git config --local --get-all team.emails)
+emails=$(pear get-emails)
 
 echo $emails | cut -d ' ' -f 1
