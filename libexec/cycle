@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Get pear emails as a space delimited string
-emails=$(git config --local --get-all team.emails)
+emails=$(pear get-emails)
 
 # Grab author email
 author=$(pear get-author)
