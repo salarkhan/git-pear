@@ -1,4 +1,17 @@
 #!/bin/sh
 
-rm -rf /usr/local/bin/pear
-ln -s $PWD/pear /usr/local/bin/
+test -f /usr/local/bin/pear && { 
+    rm -rf /usr/local/bin/pear
+    ln -s $PWD/pear /usr/local/bin/
+
+    exit 0
+}
+
+if [[ $1 = "--force" ]]; then
+    mkdir -p /usr/local/bin 
+    ln -s $PWD/pear /usr/local/bin/
+    exit 0
+fi
+
+echo you dont have a local bin folder!
+echo running ./install --force will install pear to /usr/local/bin
