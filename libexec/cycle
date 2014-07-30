@@ -1,8 +1,8 @@
 #!/bin/sh
 
-git_dir=$(git rev-parse --git-dir)
-team=$git_dir/team.txt
 author=$(pear get-author)
+committer=$(pear get-committer)
 
-sed -i '' -e '1d' $team
-echo $author >> $team
+# Swap current author & committer
+git config --local user.email $committer 
+git config --local author.email $author

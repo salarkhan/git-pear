@@ -7,9 +7,9 @@ export HOOK_FIRED=YES
 # Set this commit's committer
 git config --local user.email $(pear get-committer)
 
-# Assign the current author to a variable before cycling through the list
+# Save the current author before author/committer reassignment
 author=$(pear get-author)
 pear cycle
 
-# The commit line must run last.
+# The commit line must run last
 git commit --allow-empty --amend --author "Pear <$author>" --no-edit --quiet 

@@ -1,24 +1,9 @@
 #!/bin/sh
 
 git_dir=$(git rev-parse --git-dir)
-team_text_location=$git_dir/team.txt
-
-touch $team_text_location
 
 [[ -f $git_dir/hooks/post-commit ]] || pear create-hook-file
 
-# If multiple args given run this script once for each arg
-test $2 && {
-  for arg in $@
-    do $0 $arg
-  done
-  exit
-}
-
-# Test for duplicate team members
-if grep -q $1 $team_text_location; then
-  echo "$1 is already on the team!"
-else
-  # Append the argument to the text file
-  echo $1 >> $team_text_location
-fi
+# Set author & committer with the arguments provided 
+git config --local author.email $1
+git config --local user.email $2
