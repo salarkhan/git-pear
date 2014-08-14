@@ -5,8 +5,11 @@ git_dir=$(git rev-parse --git-dir)
 # Blow away hook & team files
 rm -f $git_dir"/hooks/post-commit"
 
+default=$(git config --global user.email) || ''
+
 # Remove any local git information we have set
-git config --local user.email 2>&1>/dev/null &&
+pear get-emails > /dev/null 2>&1 &&
   git config --local --remove-section team
+  git config --local user.email $default
 
 exit 0
