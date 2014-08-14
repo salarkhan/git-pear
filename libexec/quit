@@ -4,10 +4,9 @@ git_dir=$(git rev-parse --git-dir)
 
 # Blow away hook & team files
 rm -f $git_dir"/hooks/post-commit"
-rm -f $git_dir"/team.txt"
 
 # Remove any local git information we have set
 git config --local user.name 2>&1>/dev/null &&
-  git config --local --remove-section user
+  git config --local --remove-section team
 
 exit 0
