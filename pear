@@ -26,7 +26,7 @@ fi
 
 # If no command was given resume normal git operation
 test -n "$command" || {
-  if git config --local --get-all team.emails > /dev/null 2>&1; then
+  if $pear_commands_dir/get-emails > /dev/null 2>&1; then
     $pear_commands_dir/quit
   else
     $usage_command
