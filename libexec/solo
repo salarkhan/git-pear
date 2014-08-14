@@ -1,0 +1,13 @@
+#!/bin/sh
+
+git_dir=$(git rev-parse --git-dir)
+
+# Uninstall any already existing users
+pear quit
+
+# Create hook file
+[[ -f $git_dir/hooks/post-commit ]] || pear create-hook-file
+
+# Append the email to config file twice, allowing cycle to function
+git config --local --add team.emails $1
+git config --local --add team.emails $1
