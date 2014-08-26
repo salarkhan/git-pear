@@ -4,6 +4,8 @@ git_dir=$(git rev-parse --git-dir)
 
 [[ -f $git_dir/hooks/post-commit ]] || pear create-hook-file
 
+
+
 # If multiple args given run this script once for each arg
 test $2 && {
   for arg in $@
