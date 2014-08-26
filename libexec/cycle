@@ -1,8 +1,22 @@
 #!/bin/sh
 
-git_dir=$(git rev-parse --git-dir)
-team=$git_dir/team.txt
+# Get pear emails as a space delimited string
+emails=$(pear get-emails)
+
+# Grab author email
 author=$(pear get-author)
 
-sed -i '' -e '1d' $team
-echo $author >> $team
+# Strip author from emails string
+emails=$(echo ${emails##$author})
+
+# Append author to end of string
+emails=$(echo $emails $author)
+
+# Reset pear emails
+git config --local --unset-all team.emails
+
+# Convert whitespace to newlines & loop through
+echo $emails | tr " " "\n" | while read line; do 
+  # Add emails to pear emails key
+  git config --local --add team.emails $line
+done
