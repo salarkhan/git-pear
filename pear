@@ -37,8 +37,13 @@ test -n "$command" || {
 
 # If the first argument is an email address call the add command
 if [[ $command =~ @ ]]; then
-  # Uninstall any already existing users.
+  
+  # Uninstall any already existing users
   $pear_commands_dir/quit
+  
+  # Handle case with one email
+  test $2 || exec $pear_commands_dir/solo $command
+    
   # Replace the current process with a process created by invoking the add
   # command with all args
   exec $add_command "${@}"
