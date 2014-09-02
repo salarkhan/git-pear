@@ -1,6 +1,6 @@
 #!/bin/sh
 
-test -f /usr/local/bin/pear && { 
+test -d /usr/local/bin/ && {
     rm -rf /usr/local/bin/pear
     ln -s $PWD/pear /usr/local/bin/
 
@@ -8,7 +8,7 @@ test -f /usr/local/bin/pear && {
 }
 
 if [[ $1 = "--force" ]]; then
-    mkdir -p /usr/local/bin 
+    mkdir -p /usr/local/bin
     ln -s $PWD/pear /usr/local/bin/
     exit 0
 fi
