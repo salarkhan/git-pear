@@ -13,10 +13,10 @@ emails=$(echo ${emails##$author})
 emails=$(echo $emails $author)
 
 # Reset pear emails
-git config --local --unset-all team.emails
+git config --local --remove-section team
 
 # Convert whitespace to newlines & loop through
-echo $emails | tr " " "\n" | while read line; do 
+echo $emails | tr " " "\n" | while read line; do
   # Add emails to pear emails key
   git config --local --add team.emails $line
 done
