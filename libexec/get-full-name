@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ $GIT_API_TOKEN ]; then
+  curl -H "Authorization: token $GIT_API_TOKEN" -s https://api.github.com/users/$1 |
+    grep "name" |
+      sed "s/  \"name\": \"\(.*\)\",$/\1/" |
+        head -1
+fi
