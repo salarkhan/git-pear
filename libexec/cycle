@@ -2,15 +2,22 @@
 
 # Get pear emails as a space delimited string
 emails=$(pear get-emails)
+full_names=$(pear get-fullnames)
 
 # Grab author email
 author=$(pear get-author)
+author_name=$(pear get-fullnames | head -1)
 
 # Strip author from emails string
 emails=$(echo ${emails##$author})
+full_names=$(echo ${full_names##$author_name})
 
 # Append author to end of string
 emails=$(echo $emails $author)
+full_names=$(echo -e "$full_names \n $author_name")
+
+echo $full_names
+
 
 # Reset pear emails
 git config --local --remove-section team
@@ -20,3 +27,5 @@ echo $emails | tr " " "\n" | while read line; do
   # Add emails to pear emails key
   git config --local --add team.emails $line
 done
+
+
