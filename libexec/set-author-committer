@@ -19,7 +19,8 @@ pear cycle
 next_author=$(pear get-author)
 next_username=$(pear get-username $next_author)
 
-pear_name=$(pear get-fullnames | xargs | sed ':begin;$!N;s/\n/balllls/;tbegin')
+
+pear_name=$(pear get-fullnames | awk '{printf "%s & ", $0}' | rev | cut -c 4- | rev)
 
 # The commit line must run last.
 git commit --allow-empty --amend --author "$pear_name <$author>" --no-edit --quiet 
