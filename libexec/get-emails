@@ -1,3 +1,3 @@
 #!/bin/sh
 
-git config --local --get-all team.emails
+git config --local --get-all pear.emails

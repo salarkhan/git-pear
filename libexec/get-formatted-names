@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Get names, join them by ampersands, trim trailing bytes
+git config --local --get-all session.names |
+  awk '{printf "%s & ", $0}' | 
+    rev | cut -c 4- | rev
+

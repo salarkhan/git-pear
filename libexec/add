@@ -22,6 +22,6 @@ test $2 && {
   username=$(pear get-username $1)
   name=$(pear get-full-name $username)
 
-  git config --local --add team.fullnames "$name"
-  git config --local --add team.emails $1
+  git config --local --add session.names "$name"
+  git config --local --add pear.emails $1
 }
