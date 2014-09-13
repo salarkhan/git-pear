@@ -14,7 +14,10 @@ author=$(pear get-author)
 
 pear cycle
 
-pear_name=$(pear get-formatted-names)
+# Get names, join them by ampersands, trim trailing bytes
+pear_name=$(pear get-full-names |
+  awk '{printf "%s & ", $0}' | 
+    rev | cut -c 4- | rev)
 
 # The commit line must run last.
 git commit --allow-empty --amend --author "$pear_name <$author>" --no-edit --quiet 

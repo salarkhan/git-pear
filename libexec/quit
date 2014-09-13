@@ -12,7 +12,7 @@ pear get-emails > /dev/null 2>&1 &&
 pear get-username > /dev/null 2>&1 && 
   git config --local --remove-section user
 
-pear get-formatted-names > /dev/null 2>&1 && 
+pear get-full-names > /dev/null 2>&1 && 
   git config --local --remove-section session
 
 exit 0
