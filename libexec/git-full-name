@@ -5,4 +5,9 @@ if [ $GIT_API_TOKEN ]; then
     grep "name" |
       sed "s/  \"name\": \"\(.*\)\",$/\1/" |
         head -1
+else
+  curl -s https://api.github.com/users/$1 |
+    grep "name" |
+      sed "s/  \"name\": \"\(.*\)\",$/\1/" |
+        head -1
 fi
