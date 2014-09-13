@@ -8,7 +8,11 @@ rm -f $git_dir"/hooks/post-commit"
 # Remove any local git information we have set
 pear get-emails > /dev/null 2>&1 &&
   git config --local --remove-section pear
+
+pear get-username > /dev/null 2>&1 && 
   git config --local --remove-section user
+
+pear get-formatted-names > /dev/null 2>&1 && 
   git config --local --remove-section session
 
 exit 0

@@ -5,13 +5,17 @@ set -o errexit
 
 # Grab the full path to the git-pear project directory
 pear_dir=$(cd $( dirname $(readlink $0 )); pwd)
+
 # The dir with all the git-pear commands
 pear_commands_dir=$pear_dir/libexec
+
 # Commands that pear directly calls
 usage_command=$pear_commands_dir/usage
 add_command=$pear_commands_dir/add
+
 # Alias command to the first arg
 command=$1
+
 # The full path to the intended command
 command_path=$pear_commands_dir/$command
 
@@ -31,7 +35,6 @@ test -n "$command" || {
   else
     $usage_command
   fi
-
   exit 0 
 }
 
