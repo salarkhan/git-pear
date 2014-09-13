@@ -6,8 +6,10 @@ git_dir=$(git rev-parse --git-dir)
 rm -f $git_dir"/hooks/post-commit"
 
 # Remove any local git information we have set
-pear get-emails > /dev/null 2>&1 &&
+pear get-emails > /dev/null 2>&1 && 
   git config --local --remove-section team
+
+pear get-name > /dev/null 2>&1 && 
   git config --local --remove-section user
 
 exit 0

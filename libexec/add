@@ -1,5 +1,4 @@
 #!/bin/sh
-
 git_dir=$(git rev-parse --git-dir)
 
 [[ -f $git_dir/hooks/post-commit ]] || pear create-hook-file
