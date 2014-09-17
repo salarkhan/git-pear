@@ -1,16 +1,10 @@
 #!/bin/sh
 
 if [ $GIT_API_TOKEN ]; then
-  curl -H "Authorization: token $GIT_API_TOKEN" -s https://api.github.com/search/users?q=in:email+$1 |
-    grep "login" |
-      sed "s/  \"login\": \"\(.*\)\",$/\1/" |
-        head -1 |
-          xargs 
-           
+  json=`curl -H "Authorization: token $GIT_API_TOKEN" -s https://api.github.com/search/users?q=in:email+$1` 
+  pear get-field "$json" "login"
+
 else
-  curl -s https://api.github.com/search/users?q=in:email+$1 |
-    grep "login" |
-      sed "s/  \"login\": \"\(.*\)\",$/\1/" |
-        head -1 |
-          xargs 
+  json=`curl -s https://api.github.com/search/users?q=in:email+$1`
+  pear get-field "$json" "login"
 fi

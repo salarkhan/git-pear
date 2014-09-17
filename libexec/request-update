@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "Pear is unable to retrieve your full name from GitHub"
+echo "Please update your email address at https://github.com/settings/profile"
