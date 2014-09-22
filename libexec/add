@@ -18,6 +18,5 @@ test $2 && {
   # Append email to config file
   git config --local --add pear.emails $1
  
-  name=$(pear resolve-full-name $1)
-  git config --local --add session.names "$name"
+  pear resolve-full-name $1
 }

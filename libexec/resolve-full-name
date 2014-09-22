@@ -5,10 +5,10 @@
 username=$(pear git-username $1)
 
 if [[ -z $username ]]; then
+  pear request-update $1
   name=$(echo $1 | cut -d '@' -f 1)
-  pear request-update
 else
   name=$(pear git-full-name $username)
 fi
 
-echo $name
+git config --local --add session.names "$name"
