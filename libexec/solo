@@ -10,3 +10,6 @@ pear quit
 # Append the email to config file twice, allowing cycle to function
 git config --local --add pear.emails $1
 git config --local --add pear.emails $1
+
+name=$(pear resolve-full-name $1)
+git config --local --add session.names "$name"

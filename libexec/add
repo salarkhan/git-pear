@@ -17,16 +17,7 @@ test $2 && {
 
   # Append email to config file
   git config --local --add pear.emails $1
-  username=$(pear git-username $1)
  
-  # Get full name from GitHub API;
-  # Otherwise use first part of email as fallback
-  if [[ -z $username ]]; then
-    name=$(echo $1 | cut -d '@' -f 1)
-    pear request-update
-  else
-    name=$(pear git-full-name $username)
-  fi
-    
+  name=$(pear resolve-full-name $1)
   git config --local --add session.names "$name"
 }
